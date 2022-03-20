@@ -10,6 +10,9 @@ public class Chamado {
 	private String nomeSolicitante;
 	private String enderecoAtendimento;
 	private double distanciaPercorrida;
+	private int idVeiculo;
+	private int idColaborador;
+	
 	
 	public Chamado(String descricao, String nomeSolicitante, String enderecoAtendimento) {
 		this.descricao = descricao;
@@ -52,6 +55,42 @@ public class Chamado {
 	public void setDistanciaPercorrida(double distanciaPercorrida) {
 		this.distanciaPercorrida = distanciaPercorrida;
 	}
+	public int getIdVeiculo() {
+		return idVeiculo;
+	}
+	public void setIdVeiculo(int idVeiculo) {
+		this.idVeiculo = idVeiculo;
+	}
+	public int getIdColaborador() {
+		return idColaborador;
+	}
+	public void setIdColaborador(int idColaborador) {
+		this.idColaborador = idColaborador;
+	}
+	public int abreChamado(Chamado chamado) {
+		//sera incluido chamado no banco de dados e retornara o id do chamado
+		return 0;
+	}
+	public boolean encerraChamado(Chamado chamado) {
+		//sera excluido/encerrado o chamado no banco de dados e 
+		//retornara verdadeiro se o chamado foi encerrado com sucesso
+		return true;
+	}
+	public void atualizaStatusChamado(Chamado chamado) {
+		//fara atualizacao do status do chamado e nao retornara nada
+		
+	}
+	public void atenderChamado(Chamado chamado, Colaborador colaborador) {
+		//vai receber o chamado e o colaborador e fara o vinculo entre ambos
+		
+	}
+	public void selecionarVeiculo(Chamado chamado, Veiculo veiculo) {
+		//vai receber o chamado e o veiculo e fara o vinculo entre ambos
+		
+	}
+	public double calculaEmissao(Chamado chamado, Veiculo veiculo) {
+		//vai receber o chamado e o veiculo e fara e fara o calculo da emissao do co2
+		return 0;
+	}
 	
-
 }

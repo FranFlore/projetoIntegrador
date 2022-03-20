@@ -40,6 +40,19 @@ public class Colaborador {
 	public void setTipoHabilitacao(String tipoHabilitacao) {
 		this.tipoHabilitacao = tipoHabilitacao;
 	}
-	
-
+	public int contrataColaborador(Colaborador colaborador) {
+		//sera incluido o colaborador no banco de dados e retornara o id do colaborador
+		return 0;
+	}
+	public boolean rescindeColaborador(Colaborador colaborador) {
+		//sera excluido o colaborador do banco de dados e retornara verdeiro caso a exclusao
+		//seja feito com sucesso
+		return true;
+	}
+	public boolean atualizaCnh(Colaborador colaborador, String cnh) {
+		//sera atualizada a cnh do colaborador e retornara true caso 
+		//seja feito com sucesso
+		return true;
+	}
+		
 }

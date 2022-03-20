@@ -47,4 +47,14 @@ public class Veiculo {
 		this.consumoKm = consumoKm;
 	}
 
+	public int compraVeiculo(Veiculo veiculo) {
+		//sera incluido um veiculo no banco de dados e retornara o id do veiculo
+		return 0;
+	}
+	public boolean vendeVeiculo(Veiculo veiculo) {
+		//sera excluido o veiculo do banco de dados e retornara verdeiro caso a exclusao
+		//seja feito com sucesso
+		return true;
+	}
+	
 }
