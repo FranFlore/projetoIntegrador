@@ -22,11 +22,11 @@ public class ColaboradorDao {
 	}
 
 	public void atualizar(Colaborador colaborador) {
-		listaColaborador.set(colaborador.getIdColaborador(), colaborador);
+		listaColaborador.set(colaborador.getIdColaborador() -1, colaborador);
 	}
 
 	public void excluir(Colaborador colaborador) {
-		listaColaborador.remove(colaborador.getIdColaborador());
+		listaColaborador.remove(colaborador.getIdColaborador() - 1);
 	}
 
 	public List<Colaborador> listar() {

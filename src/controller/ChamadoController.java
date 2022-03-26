@@ -41,6 +41,7 @@ public class ChamadoController {
 	}
 
 	public void encerrarChamado(Chamado chamado) throws Exception {
+		LocalDate dataEncerramento = LocalDate.now();
 		if (chamado == null) {
 			throw new Exception("Chamado Inválido");
 		}
@@ -51,6 +52,7 @@ public class ChamadoController {
 			throw new Exception("Emissão não preenchida");
 		}
 		chamado.setStatus("Encerrado");
+		chamado.setDataEncerramento(dataEncerramento);
 		ChamadoDao.getInstance().atualizar(chamado);
 	}
 

@@ -23,11 +23,11 @@ public class ChamadoDao {
 	}
 
 	public void atualizar(Chamado chamado) {
-		listaChamado.set(chamado.getIdChamado(), chamado);
+		listaChamado.set(chamado.getIdChamado() - 1, chamado);
 	}
 
 	public void excluir(Chamado chamado) {
-		listaChamado.remove(chamado);
+		listaChamado.remove(chamado.getIdChamado() - 1);
 	}
 
 	public List<Chamado> listar() {

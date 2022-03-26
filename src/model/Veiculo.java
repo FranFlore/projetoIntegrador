@@ -57,7 +57,7 @@ public class Veiculo {
 		this.status = status;
 	}
 
-	public String getDataStatus() {
+	public String getStatus() {
 		return status;
 	}
 
