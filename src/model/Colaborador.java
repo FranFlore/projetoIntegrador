@@ -2,8 +2,6 @@ package model;
 
 import java.time.LocalDate;
 
-import dao.ChamadoDao;
-
 public class Colaborador {
 
 	private int idColaborador;

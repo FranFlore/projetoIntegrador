@@ -2,7 +2,6 @@ package controller;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import dao.ChamadoDao;
 import model.Chamado;
 
@@ -11,7 +10,7 @@ public class ChamadoController {
 	private double percentualGasolinaLitro = 0.82;
 	private double densidadeGasolina = 0.75;
 	private double fatorTransformacao = 3.7;
-	
+
 	public void criarChamado(Chamado chamado)  throws Exception {
 		LocalDate dataCriacao = LocalDate.now();
 		chamado.setDataCriacao(dataCriacao);
