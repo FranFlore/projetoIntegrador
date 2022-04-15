@@ -7,7 +7,7 @@ import model.Veiculo;
 
 public class VeiculoController {
 
-	public void comprarVeiculo(Veiculo veiculo) throws Exception {
+	public void cadastrarVeiculo(Veiculo veiculo) throws Exception {
 		LocalDate dataAquisicao = LocalDate.now();
 		veiculo.setDataAquisicao(dataAquisicao);
 		veiculo.setStatus("Ativo");
@@ -27,27 +27,7 @@ public class VeiculoController {
 		VeiculoDao.getInstance().salvar(veiculo);
 	}
 
-	public void venderVeiculo(Veiculo veiculo) throws Exception {
-		LocalDate dataVenda = LocalDate.now();
-		veiculo.setDataVenda(dataVenda);
-		veiculo.setStatus("Vendido");
-
-		if(veiculo == null) {
-			throw new Exception("Veículo inválido");
-		}
-		VeiculoDao.getInstance().atualizar(veiculo);
-	}
-
-	public void desabilitaVeiculo(Veiculo veiculo) throws Exception {
-		veiculo.setStatus("Indisponível");
-		if(veiculo == null) {
-			throw new Exception("Veículo inválido");
-		}
-		VeiculoDao.getInstance().atualizar(veiculo);
-	}
-
-	public void habilitaVeiculo(Veiculo veiculo) throws Exception {
-		veiculo.setStatus("Ativo");
+	public void atualizarVeiculo(Veiculo veiculo) throws Exception {
 		if(veiculo == null) {
 			throw new Exception("Veículo inválido");
 		}
@@ -63,5 +43,9 @@ public class VeiculoController {
 
 	public List<Veiculo> listar() {
 		return VeiculoDao.getInstance().listar();
+	}
+	
+	public Veiculo getVeiculo(int idVeiculo) {
+		return VeiculoDao.getInstance().getVeiculoById(idVeiculo);
 	}
 }

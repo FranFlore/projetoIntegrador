@@ -8,8 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import Util.ConnectionUtil;
+
 import model.Colaborador;
+import util.ConnectionUtil;
 
 public class ColaboradorDao {
 

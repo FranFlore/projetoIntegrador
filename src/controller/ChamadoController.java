@@ -3,7 +3,9 @@ package controller;
 import java.time.LocalDate;
 import java.util.List;
 import dao.ChamadoDao;
+import dao.ColaboradorDao;
 import model.Chamado;
+import model.Colaborador;
 
 public class ChamadoController {
 	
@@ -14,7 +16,7 @@ public class ChamadoController {
 	public void criarChamado(Chamado chamado)  throws Exception {
 		LocalDate dataCriacao = LocalDate.now();
 		chamado.setDataCriacao(dataCriacao);
-		chamado.setStatus("Ativo");
+		chamado.setStatus("Aberto");
 
 		if (chamado.getDescricao() == null || chamado.getDescricao().length() < 30) {
 			throw new Exception("Descrição Inválida");
@@ -28,30 +30,7 @@ public class ChamadoController {
 		ChamadoDao.getInstance().salvar(chamado);
 	}
 
-	public void atenderChamado(Chamado chamado) throws Exception {
-		if (chamado.getColaborador() == null) {
-			throw new Exception("Colaborador Inválido");
-		}
-		if (chamado.getVeiculo() == null) {
-			throw new Exception("Veículo Inválido");
-		}
-		chamado.setStatus("Em Atendimento");
-		ChamadoDao.getInstance().atualizar(chamado);
-	}
-
-	public void encerrarChamado(Chamado chamado) throws Exception {
-		LocalDate dataEncerramento = LocalDate.now();
-		if (chamado == null) {
-			throw new Exception("Chamado Inválido");
-		}
-		if(chamado.getDistanciaPercorrida() <= 0) {
-			throw new Exception("Distância Percorrida Inválida");
-		}
-		if(chamado.getEmissaoCo() <= 0) {
-			throw new Exception("Emissão não preenchida");
-		}
-		chamado.setStatus("Encerrado");
-		chamado.setDataEncerramento(dataEncerramento);
+	public void atualizarChamado(Chamado chamado) throws Exception {
 		ChamadoDao.getInstance().atualizar(chamado);
 	}
 
@@ -66,13 +45,16 @@ public class ChamadoController {
 		return ChamadoDao.getInstance().listar();
 	}
 
-	public void calculaEmissao(Chamado chamado) throws Exception {
+	public double calculaEmissao(Chamado chamado) throws Exception {
 		if(chamado == null) {
 			throw new Exception("Chamado Inválido");
 		}
 		double consumoLitros = chamado.getVeiculo().getConsumoKm() * chamado.getDistanciaPercorrida();
 		double emissaoCo = consumoLitros * percentualGasolinaLitro * densidadeGasolina * fatorTransformacao;
-		chamado.setEmissaoCo(emissaoCo);
-		ChamadoDao.getInstance().atualizar(chamado);
+		return emissaoCo;
+	}
+
+	public Chamado getChamado(int idChamado) {
+		return ChamadoDao.getInstance().getChamadoById(idChamado);
 	}
 }

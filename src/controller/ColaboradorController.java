@@ -7,7 +7,7 @@ import model.Colaborador;
 
 public class ColaboradorController {
 
-	public void contratarColaborador(Colaborador colaborador) throws Exception {
+	public void cadastrarColaborador(Colaborador colaborador) throws Exception {
 		LocalDate dataAdmissao = LocalDate.now();
 		colaborador.setDataAdmissao(dataAdmissao);
 		colaborador.setStatus("Ativo");
@@ -23,25 +23,10 @@ public class ColaboradorController {
 		ColaboradorDao.getInstance().salvar(colaborador);
 	}
 
-	public void atualizarCnh(Colaborador colaborador) throws Exception {
-		if(colaborador.getPossuiHabilitacao()) {
-			if (colaborador.getTipoHabilitacao() == null || colaborador.getTipoHabilitacao().isEmpty()) {
-				throw new Exception("Tipo de Habilitação inválida.");
-			} else {
-				ColaboradorDao.getInstance().atualizar(colaborador);
-			}
+	public void atualizarColaborador(Colaborador colaborador) throws Exception {
+		if(colaborador == null) {
+			throw new Exception("Colaborador inválido");
 		}
-	}
-
-	public void rescindirColaborador(Colaborador colaborador) throws Exception {
-		LocalDate dataDemissao = LocalDate.now();
-		colaborador.setDataDemissao(dataDemissao);
-
-		if (colaborador == null) {
-			throw new Exception("Colaborador Inválido");
-		}
-
-		colaborador.setStatus("Demitido");
 		ColaboradorDao.getInstance().atualizar(colaborador);
 	}
 
@@ -54,5 +39,9 @@ public class ColaboradorController {
 
 	public List<Colaborador> listar() {
 		return ColaboradorDao.getInstance().listar();
+	}
+	
+	public Colaborador getColaborador(int idColaborador) {
+		return ColaboradorDao.getInstance().getColaboradorById(idColaborador);
 	}
 }

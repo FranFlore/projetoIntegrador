@@ -9,9 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Util.ConnectionUtil;
 import model.Chamado;
 import model.Colaborador;
+import util.ConnectionUtil;
 
 public class ChamadoDao {
 
@@ -79,8 +79,11 @@ public class ChamadoDao {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				Chamado chamado = new Chamado(rs.getString("descricao"), rs.getString("nomeSolicitante"), rs.getString("enderecoAtendimento"));
+				Chamado chamado = new Chamado();
 				chamado.setIdChamado(rs.getInt("idChamado"));
+				chamado.setDescricao(rs.getString("descricao"));
+				chamado.setEnderecoAtendimento(rs.getString("enderecoAtendimento"));
+				chamado.setNomeSolicitante("nomeSolicitante");
 				chamado.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
 				chamado.setDataEncerramento(rs.getDate("dataEncerramento") != null ? rs.getDate("dataEncerramento").toLocalDate() : null);
 				chamado.setStatus(rs.getString("status"));
@@ -94,6 +97,32 @@ public class ChamadoDao {
 			e.printStackTrace();
 		}
 		return listaChamado;
+	}
+	
+	public Chamado getChamadoById(int idChamado) {
+		Chamado returnChamado = new Chamado();
+		try {
+			String sql = "select * from chamado where idChamado = ?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, idChamado);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				returnChamado.setIdChamado(rs.getInt("idChamado"));
+				returnChamado.setDescricao(rs.getString("descricao"));
+				returnChamado.setEnderecoAtendimento(rs.getString("enderecoAtendimento"));
+				returnChamado.setNomeSolicitante(rs.getString("nomeSolicitante"));
+				returnChamado.setDataCriacao(rs.getDate("dataCriacao").toLocalDate());
+				returnChamado.setDataEncerramento(rs.getDate("dataEncerramento") != null ? rs.getDate("dataEncerramento").toLocalDate() : null);
+				returnChamado.setStatus(rs.getString("status"));
+				returnChamado.setDistanciaPercorrida(rs.getDouble("distanciaPercorrida"));
+				returnChamado.setEmissaoCo(rs.getDouble("emissaoCo"));
+				returnChamado.setVeiculo(VeiculoDao.getInstance().getVeiculoById(rs.getInt("idVeiculo")));
+				returnChamado.setColaborador(ColaboradorDao.getInstance().getColaboradorById(rs.getInt("idColaborador")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return returnChamado;
 	}
 
 	public Date getDataCriacao(Chamado chamado) {

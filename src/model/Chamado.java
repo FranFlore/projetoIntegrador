@@ -16,10 +16,7 @@ public class Chamado {
 	private Veiculo veiculo;
 	private Colaborador colaborador;
 
-	public Chamado(String descricao, String nomeSolicitante, String enderecoAtendimento) {
-		this.descricao = descricao;
-		this.nomeSolicitante = nomeSolicitante;
-		this.enderecoAtendimento = enderecoAtendimento;
+	public Chamado() {
 	}
 
 	public int getIdChamado() {
